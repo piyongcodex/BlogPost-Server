@@ -1,0 +1,94 @@
+Objective: ExpressJS API - Blog Post Application and Management System.
+
+1. What is the main objective of the project?
+	- ExpressJS API - Blog Post Application and Management with Simple CRUD functionalities.
+
+2. Who are the target users of the application?
+	- Registred Users and Admin.
+
+3. What are the core features or functionalities required?
+
+	- Basic CRUD operations for managing movie in the catalog (Create, Read, Update, Delete).
+
+		- Authenticated user ability to retrieve a list of all blog post.
+        - Authenticated user ability to retrieve a single blog post.
+		- Authenticated user ability to add a blog post.
+        - Authenticated user ability to update his/her own blog post.
+        - Authenticated user ability to delete his/her own blog post.
+        - Authenticated user ability to add comment to a blog post.
+        - Authenticated user ability to update his/her own comment to a blog post.
+        - Authenticated user ability to remove his/her own comment to a blog post.
+
+		- Authenticated Admin user ability to remove a blog post.
+		- Authenticated Admin user ability to remove a comment.
+
+4. What data will the application need to store and manage?
+
+	- Blog
+		- title
+		- content
+		- userId
+        - creationDate
+        - comments
+
+	- User information 
+		- username
+		- email
+		- password
+		- isAdmin
+
+5. Are there any specific technical requirements or constraints?
+
+	- Express.js API.
+	- MongoDB with Mongoose for data storage and management.
+	- RESTful Architecture.
+
+6. What are the security and authentication requirements?
+
+	- Token-based Authentication (JWT).
+	- Brcypt hash
+
+7. What are your routes and controllers?
+
+	Routes:
+
+	User Routes:
+
+	POST /users/login - User login route.
+	POST /users/register - User registration route.
+	GET /users/details - User details route.
+
+    Movie Routes:
+	POST /blogs/addBlog - Create a new blog.
+
+	GET /blogs/getBlogs - Retrieve a list of all the avaible Blogs.
+	GET /blogs/getBlog/:id - Retrieve a specific blog.
+
+    PATCH /blogs/addComment/:id - Add a comment in a blog.
+	PATCH /blogs/updateComment/:id - Update a specific comment.
+	PATCH /blogs/updateBlog/:id - Update an existing blog.
+	PATCH /blogs/removeComment/:id - Remove a specific comment.
+	
+
+	DELETE /blogs/deleteBlog/:id - Delete a blogpost.
+
+Controllers:
+
+	User Controller:
+
+	loginUser
+	registerUser
+
+    Inventory Controller:
+
+	getAllMovies
+	getMovie
+	addMovie
+    addComment
+	updateMovie
+	deleteMovie
+    getComments
+
+    Admin User: Email: admin@mail.com, Password: 'admin1234'
+
+    
