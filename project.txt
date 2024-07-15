@@ -63,6 +63,7 @@ Objective: ExpressJS API - Blog Post Application and Management System.
 
 	GET /blogs/getBlogs - Retrieve a list of all the avaible Blogs.
 	GET /blogs/getBlog/:id - Retrieve a specific blog.
+	GET /blogs/getMyBlogs - Retrieve a list of blog created by the user.
 
     PATCH /blogs/addComment/:id - Add a comment in a blog.
 	PATCH /blogs/updateComment/:id - Update a specific comment.
