@@ -25,6 +25,22 @@ module.exports.addBlog = async (req, res) => {
       .send({ error: "Failed to save the blog", details: error.message });
   }
 };
+module.exports.getMyBlogs = (req, res) => {
+  const userId = req.user.id;
+
+  Blog.find({ userId: userId })
+    .then((blogs) => {
+      if (blogs.length > 0) {
+        return res.status(200).send({ blogs });
+      } else {
+        return res.status(404).send({ message: "No blogs found." });
+      }
+    })
+    .catch((err) => {
+      console.error("Error finding blogs:", err);
+      return res.status(500).send({ error: "Error finding blogs." });
+    });
+};
 module.exports.getBlogs = (req, res) => {
   Blog.find()
     .then((blogs) => {

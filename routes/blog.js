@@ -7,6 +7,7 @@ const router = express.Router();
 router.post("/addBlog", verify, blogController.addBlog);
 
 router.get("/getBlogs", verify, blogController.getBlogs);
+router.get("/getMyBlogs", verify, blogController.getMyBlogs);
 router.get("/getBlog/:id", verify, blogController.getBlog);
 
 router.patch("/addComment/:id", verify, blogController.addComment);
