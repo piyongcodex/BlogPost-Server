@@ -1,7 +1,7 @@
 const Blog = require("../models/Blog");
 
 module.exports.addBlog = async (req, res) => {
-  const { title, content } = req.body;
+  const { title, content, author } = req.body;
   console.log(title);
   // Validate input
   if (!title || !content) {
