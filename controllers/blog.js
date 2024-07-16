@@ -14,6 +14,7 @@ module.exports.addBlog = async (req, res) => {
       title,
       content,
       userId: req.user.id,
+      author,
     });
     // Save the blog to the database
     const savedBlog = await newBlog.save();
@@ -121,6 +122,7 @@ module.exports.updateBlog = (req, res) => {
   let blogUpdates = {
     title: req.body.title,
     content: req.body.content,
+    author: req.body.author,
   };
 
   return Blog.findByIdAndUpdate(req.params.id, blogUpdates)

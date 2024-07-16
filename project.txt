@@ -28,6 +28,7 @@ Objective: ExpressJS API - Blog Post Application and Management System.
 		- title
 		- content
 		- userId
+		- author
         - creationDate
         - comments
 

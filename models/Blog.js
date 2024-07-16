@@ -13,6 +13,10 @@ const blogSchema = new mongoose.Schema({
     type: String,
     required: [true, "User ID is required"],
   },
+  author: {
+    type: String,
+    required: [true, "User ID is required"],
+  },
   isAdmin: {
     type: Boolean,
     default: false,
