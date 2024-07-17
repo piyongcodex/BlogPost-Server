@@ -4,6 +4,17 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const auth = require("../auth");
 
+module.exports.getName = (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  return User.findById(id).then((user) => {
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    return res.status(200).send(user);
+  });
+};
+
 module.exports.getDetails = (req, res) => {
   console.log(req.user.id);
   return User.findById(req.user.id).then((user) => {

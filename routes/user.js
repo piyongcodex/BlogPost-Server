@@ -19,6 +19,9 @@ router.post("/login", userController.loginUser);
 // Route for user details
 router.get("/details", verify, userController.getDetails);
 
+// Route for user details
+router.get("/getName/:id", verify, userController.getName);
+
 // [SECTION] Export Route System
 // allows us to export the "router" object and use it in other files within the project
 module.exports = router;
