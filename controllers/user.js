@@ -68,45 +68,36 @@ module.exports.registerUser = (req, res) => {
       return res.status(500).send({ error: "Error in Save" });
     });
 };
-module.exports.loginUser = (req, res) => {
-  // if the user email given in the request body contains "@"
-  if (typeof req.body.username === "string") {
-    // findOne() method return the first document in the collection that matches our search criteria
-    return User.findOne({ username: req.body.username })
-      .then((user) => {
-        // If the user does not exist
-        if (user == null) {
-          return res.status(401).send({ error: "No User found" });
+module.exports.loginUser = async (req, res) => {
+  try {
+    const { username, password } = req.body;
 
-          // If the user exists
-        } else {
-          // compareSync() method to compare the login password and the database password. it decrypts the database password and then compare it to the request body password. it will return true if it matches and will return false otherwise
-          const isPasswordCorrect = bcrypt.compareSync(
-            req.body.password,
-            user.password
-          );
+    if (typeof username !== "string" || typeof password !== "string") {
+      return res.status(400).send({ error: "Invalid input" });
+    }
 
-          // If the password matches
-          if (isPasswordCorrect) {
-            return res
-              .status(200)
-              .send({ access: auth.createAccessToken(user) });
+    const searchCriteria = username.includes("@")
+      ? { email: username }
+      : { username };
 
-            // If the password does not match
-          } else {
-            // 401 status code means unauthorized. This means that the user is not authorized to acces the application. The credentials does not match
-            return res
-              .status(401)
-              .send({ error: "Username and password do not match" });
-          }
-        }
-      })
-      .catch((findErr) => {
-        console.error("Error in finding the user: ", findErr);
+    const user = await User.findOne(searchCriteria);
 
-        return res.status(500).send({ error: "Error in find", findErr });
-      });
-  } else {
-    return res.status(400).send({ error: "Invalid in Username" });
+    if (!user) {
+      return res.status(401).send({ error: "No User found" });
+    }
+
+    const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+
+    if (isPasswordCorrect) {
+      const accessToken = auth.createAccessToken(user);
+      return res.status(200).send({ access: accessToken });
+    } else {
+      return res
+        .status(401)
+        .send({ error: "Username and password do not match" });
+    }
+  } catch (error) {
+    console.error("Error in loginUser: ", error);
+    return res.status(500).send({ error: "Internal server error" });
   }
 };

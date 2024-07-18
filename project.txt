@@ -58,6 +58,7 @@ Objective: ExpressJS API - Blog Post Application and Management System.
 	POST /users/login - User login route.
 	POST /users/register - User registration route.
 	GET /users/details - User details route.
+	GET /users/getName - User details route.
 
     Movie Routes:
 	POST /blogs/addBlog - Create a new blog.
